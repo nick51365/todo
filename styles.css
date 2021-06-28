@@ -1,0 +1,57 @@
+body{
+    font-family: sans-serif;
+}
+.sidebar{
+    background-color: rgba(1, 1, 1, 0.788);
+    position: fixed;
+    margin-left: -8px;
+    margin-top: -8px;
+    width: 300px;
+    height: 105vh;
+    text-align: center;
+    color: white;
+}
+.nameDiv{
+    margin-top: -8px;
+    margin-left: 300px;
+    text-align: center;
+    border: 1px solid black;
+}
+.taskContainer{
+    margin-left: 300px;
+    border: 2px solid red;
+    text-align: center;
+}
+.task{
+    font-size: 20px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid green;
+    width: 90%;
+    padding: 15px;
+}
+.project{
+    font-size: 20px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgba(182, 182, 182, 0.158);
+    width: 80%;
+}
+.projectBtn{
+    padding: 8px;
+    width: 80%;
+    font-size: 17px;
+    margin-top: 20px;
+}
+.taskBtn{
+    position: absolute;
+    right: 40px;
+    padding: 8px;
+    
+}
+
