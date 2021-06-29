@@ -1,0 +1,1 @@
+document.getElementById("projectBtn").addEventListener("click",(()=>function(){const e=document.getElementById("formContainer");console.log(e.style.display),""==e.style.display?e.style.display="flex":"flex"==e.style.display&&(e.style.display="")}()));

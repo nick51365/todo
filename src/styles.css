@@ -1,7 +1,6 @@
 body{
     font-family: sans-serif;
 }
-
 .sidebar{
     background-color: rgba(1, 1, 1, 0.788);
     position: fixed;
@@ -20,7 +19,6 @@ body{
 }
 .taskContainer{
     margin-left: 300px;
-    border: 2px solid red;
     text-align: center;
 }
 .task{
@@ -51,8 +49,39 @@ body{
 }
 .taskBtn{
     position: absolute;
-    right: 40px;
+    right: 20px;
     padding: 8px;
     
+}
+#formContainer{
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    position: absolute;
+    left: 30vw;
+    text-align: center;
+    z-index: 10;
+}
+#projectForm{
+    background-color: rgb(74, 55, 243);
+    height: 40vh;
+    min-height: 375px;;
+    width: 50vw;
+    min-width: 50vw;
+    max-width: 600px;
+
+}
+#formContainer input{
+    margin: 20px;
+    height: 30px;
+    width: 70%;
+}
+#formContainer h1{
+    margin-top: 40px;
+}
+#formContainer button{
+    height: 30px;
+    width: 30%;
+    margin: 20px;
 }
 
