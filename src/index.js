@@ -7,8 +7,9 @@ let projectSubmitBtn = document.getElementById("projectSubmitBtn");
 //Assign event listener to project submit button
 projectSubmitBtn.addEventListener("click", () => {
     projectHandler.addProject(event);
-    displayController.displayProject();  
+    displayController.displayProjectSidebar(); 
 });
+
 
 //Assign event listener to "Add Project" button
 const projectBtn = document.getElementById("projectBtn");
