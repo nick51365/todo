@@ -25,6 +25,7 @@ projectBtn.addEventListener("click",() => {
 const tasksForm = document.getElementById("tasksForm");
 tasksForm.addEventListener("submit",() => {
     taskHandler.addTask(event);
+    displayController.displayTasks();
 })
 
 //Assign event listener to "Add Task" button

@@ -9,10 +9,9 @@ function Task(title, description, dueDate, priority){
     this.priority = priority
 };
 
-//Creates new Task object with input values from, pushes to current project's tasks array
+//Creates new Task object with input values from "Add Task" form, pushes to current project's tasks array
 function addTask(event){
     event.preventDefault();
-    console.log(displayedIndex);
     if (projectHandler.projects[displayedIndex] === undefined){
         alert("Select a project to add your task to.")
         return;

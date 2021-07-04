@@ -14,7 +14,10 @@ function displayProjectSidebar(){
     newProject.textContent = projectHandler.projects[projectHandler.projects.length - 1].title;
     newProject.className = "project";
     newProject.setAttribute("data-id", dataID);
-    newProject.addEventListener("click", () => displayProjectMain(dataID));
+    newProject.addEventListener("click", () => {
+        displayProjectMain(dataID);
+        displayTasks(dataID);
+    });
     projectsContainer.append(newProject);
 };
 
@@ -23,17 +26,27 @@ function displayProjectMain(dataID){
     
     //Update displayedIndex to ID of clicked project
     displayedIndex = dataID;
-
     //Display name of project on main display
     let nameDisplay = document.getElementById("nameDisplay");
-    nameDisplay.textContent = projectHandler.projects[dataID].title;
- 
-    //Iterate through project's tasks array, creating divs for each and displaying
-    
+    nameDisplay.textContent = projectHandler.projects[displayedIndex].title; 
+};
+
+//Clears task container and repopulates with updated task list
+function displayTasks(){
+    let taskList = projectHandler.projects[displayedIndex].tasks;
+    let taskContainer = document.getElementById("taskContainer");
+    taskContainer.textContent = "";
+    for (let i = 0; i < taskList.length; i++){
+        let newTask = document.createElement("div");
+        newTask.className = "task";
+        newTask.textContent = taskList[i].title;
+        taskContainer.append(newTask);
+    }
 }
 
 export{
     displayProjectSidebar,
     displayProjectMain,
+    displayTasks,
     displayedIndex,
 }
