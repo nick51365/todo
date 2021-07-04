@@ -1,4 +1,5 @@
 import * as projectHandler from "./projectHandler.js";
+import * as taskHandler from "./taskHandler.js"
 
 //Index within "projects" array of currently displayed project
 let displayedIndex = "";
@@ -19,12 +20,20 @@ function displayProjectSidebar(){
 
 //When a project on sidebar is clicked, display on main display
 function displayProjectMain(dataID){
+    
+    //Update displayedIndex to ID of clicked project
+    displayedIndex = dataID;
+
+    //Display name of project on main display
     let nameDisplay = document.getElementById("nameDisplay");
     nameDisplay.textContent = projectHandler.projects[dataID].title;
+ 
+    //Iterate through project's tasks array, creating divs for each and displaying
+    
 }
-
 
 export{
     displayProjectSidebar,
     displayProjectMain,
+    displayedIndex,
 }

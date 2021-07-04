@@ -5,7 +5,7 @@
     </head>
     <body>
         <div class="sidebar">
-            <h1>Projects</h1>
+            <h1>My Projects</h1>
             <div id="projectsContainer">
             </div>
             <button id="projectBtn">+ Add Project</button>
@@ -14,18 +14,34 @@
             <h1 id="nameDisplay">Project Name</h1>
         </div>
         <div class="taskContainer">
-            <div class="task">Example Task</div>
-            <div class="task">Example Task</div>
             <button id="taskBtn">+ Add Task</button>
         </div>
-        <div id="formContainer">
+        <div id="projectsFormContainer">
             <form id="projectForm">
                 <h1>New Project</h1>
                 <label for="title">Title</label><br>
-                <input id="titleInput" name="title" placeholder="Title of project"><br>
+                <input id="titleInput" name="title" placeholder="Title of project" required><br>
                 <label for="description">Description</label><br>
-                <input id="descInput" name="description" placeholder="Description">
+                <input id="descInput" name="description" placeholder="Description" required>
                 <button id="projectSubmitBtn" type="submit">Create Project</button>
+            </form>
+        </div>
+        <div id="tasksFormContainer">
+            <form id="tasksForm">
+                <h1>New Task</h1>
+                <label for="taskTitle">Title</label><br>
+                <input id="taskTitleInput" name="taskTitle" placeholder="Title of task" required> <br>
+                <label for="taskDesc">Description</label><br>
+                <input id="taskDescInput" name="taskDesc" placeholder="Description" required><br>
+                <label for="dueDate">Due Date</label><br>
+                <input type="date" id="dueDateInput" name="dueDate" required><br>
+                <label for="priority">Priority</label><br>
+                <select id="priorityInput" name="priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select><br>
+                <button id="taskSubmitBtn" type="submit">Create Task</button>
             </form>
         </div>
     <script src="main.js"></script>

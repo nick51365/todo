@@ -1,28 +1,41 @@
 import * as projectHandler from "./projectHandler.js";
+import * as taskHandler from "./taskHandler.js";
 import * as displayController from "./displayController.js";
 
-//Identify new project submit button
-let projectSubmitBtn = document.getElementById("projectSubmitBtn");
 
-//Assign event listener to project submit button
-projectSubmitBtn.addEventListener("click", () => {
+//Assign submit event listener to project form
+let projectForm = document.getElementById("projectForm");
+projectForm.addEventListener("submit", () => {
     projectHandler.addProject(event);
     displayController.displayProjectSidebar(); 
 });
 
-
 //Assign event listener to "Add Project" button
 const projectBtn = document.getElementById("projectBtn");
-projectBtn.addEventListener("click",() => toggleForm());
-
-//Toggle display/hide form for new project
-function toggleForm(){
-    const formContainer = document.getElementById("formContainer");
-    if (formContainer.style.display == ""){
-        formContainer.style.display = "flex";
-    }else if (formContainer.style.display == "flex"){
-        formContainer.style.display = "";
+const projectsFormContainer = document.getElementById("projectsFormContainer");
+projectBtn.addEventListener("click",() => {
+    if (projectsFormContainer.style.display == ""){
+        projectsFormContainer.style.display = "flex";
+    }else if (projectsFormContainer.style.display == "flex"){
+        projectsFormContainer.style.display = "";
     }
-};
+});
 
+//Assign submit event listener to task form
+const tasksForm = document.getElementById("tasksForm");
+tasksForm.addEventListener("submit",() => {
+    taskHandler.addTask(event);
+})
+
+//Assign event listener to "Add Task" button
+const taskBtn = document.getElementById("taskBtn");
+const tasksFormContainer = document.getElementById("tasksFormContainer");
+taskBtn.addEventListener("click",() => {
+    if (tasksFormContainer.style.display == ""){
+        tasksFormContainer.style.display = "flex";
+    }else if (tasksFormContainer.style.display == "flex"){
+        tasksFormContainer.style.display = "";
+    }
+
+});
 
