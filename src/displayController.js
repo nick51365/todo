@@ -1,5 +1,4 @@
 import * as projectHandler from "./projectHandler.js";
-import * as taskHandler from "./taskHandler.js"
 
 //Index within "projects" array of currently displayed project
 let displayedIndex = "";
@@ -7,33 +6,60 @@ let displayedIndex = "";
 //Identify projectsContainer div
 let projectsContainer = document.getElementById("projectsContainer");
 
+//On page load, iterate through local storage and display existing projects
+function displayOnLoad(){
+    for (let i = 0; i < localStorage.length; i++){
+        projectHandler.currentID++;
+        let newProject = document.createElement("div");
+        let dataID = projectHandler.currentID - 1;
+
+        //Parse current project object from local storage
+        let currentProject = JSON.parse(localStorage[i]);
+
+        //Build project div in sidebar
+        newProject.textContent = currentProject.title;
+        newProject.className = "project";
+        newProject.setAttribute("data-id", dataID);
+        newProject.addEventListener("click", () => {
+            displayProjectMain(dataID, currentProject);
+            displayTasks(dataID);
+        });
+        projectsContainer.append(newProject);   
+    };
+};
+
 //When a new project is created, create a div with "project" class and append to DOM
 function displayProjectSidebar(){
    let newProject = document.createElement("div");
    let dataID = projectHandler.currentID - 1;
-    newProject.textContent = projectHandler.projects[projectHandler.projects.length - 1].title;
+
+   //Parse project from local storage so it can be read as an object
+    let currentProject = JSON.parse(localStorage[localStorage.length - 1]);
+    newProject.textContent = currentProject.title;
     newProject.className = "project";
     newProject.setAttribute("data-id", dataID);
     newProject.addEventListener("click", () => {
-        displayProjectMain(dataID);
+        displayProjectMain(dataID, currentProject);
         displayTasks(dataID);
     });
     projectsContainer.append(newProject);
 };
 
 //When a project on sidebar is clicked, display on main display
-function displayProjectMain(dataID){
+function displayProjectMain(dataID, currentProject){
     
     //Update displayedIndex to ID of clicked project
     displayedIndex = dataID;
+    console.log("displayedIndex = ", displayedIndex );
     //Display name of project on main display
     let nameDisplay = document.getElementById("nameDisplay");
-    nameDisplay.textContent = projectHandler.projects[displayedIndex].title; 
+    nameDisplay.textContent = currentProject.title; 
 };
 
 //Clears task container and repopulates with updated task list
 function displayTasks(){
-    let taskList = projectHandler.projects[displayedIndex].tasks;
+    let currentProject = JSON.parse(localStorage[displayedIndex]);
+    let taskList = currentProject.tasks;
     let taskContainer = document.getElementById("taskContainer");
     taskContainer.textContent = "";
     
@@ -75,5 +101,6 @@ export{
     displayProjectSidebar,
     displayProjectMain,
     displayTasks,
+    displayOnLoad,
     displayedIndex,
 }

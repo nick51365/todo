@@ -2,8 +2,6 @@ import * as projectHandler from "./projectHandler.js";
 import * as taskHandler from "./taskHandler.js";
 import * as displayController from "./displayController.js";
 
-
-
 //Assign submit event listener to project form
 let projectForm = document.getElementById("projectForm");
 projectForm.addEventListener("submit", () => {
@@ -41,7 +39,5 @@ taskBtn.addEventListener("click",() => {
 
 });
 
-//On load, display example task for debug purposes
-projectHandler.currentID = 1;
-displayController.displayProjectSidebar();
-displayController.displayedIndex = 0;
+//Display existing projects on page load
+displayController.displayOnLoad();

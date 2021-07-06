@@ -11,8 +11,14 @@ function Task(title, description, dueDate, priority){
 
 //Creates new Task object with input values from "Add Task" form, pushes to current project's tasks array
 function addTask(event){
+    //Prevent page refresh on form submit
     event.preventDefault();
-    if (projectHandler.projects[displayedIndex] === undefined){
+
+    //Parse current project object from local storage
+    let currentProject = JSON.parse(localStorage[displayedIndex]);
+    console.log(currentProject);
+
+    if (currentProject === undefined){
         alert("Select a project to add your task to.")
         return;
     }else{
@@ -21,7 +27,13 @@ function addTask(event){
             taskDescInput.value,
             dueDateInput.value,
             priorityInput.value);
-        projectHandler.projects[displayedIndex].tasks.push(createdTask);
+
+        //Push created task to currently displayed project object
+        currentProject.tasks.push(createdTask);
+
+        //Stringify updated project to store locally
+        let currentProject_serialized = JSON.stringify(currentProject);
+        localStorage.setItem(displayedIndex, currentProject_serialized);
         closeForm();
     };
 };
