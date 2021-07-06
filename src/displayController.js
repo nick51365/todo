@@ -36,11 +36,38 @@ function displayTasks(){
     let taskList = projectHandler.projects[displayedIndex].tasks;
     let taskContainer = document.getElementById("taskContainer");
     taskContainer.textContent = "";
+    
+    //Iterate through the task list
     for (let i = 0; i < taskList.length; i++){
+
+        //Creates a "task" div containing an h1 for its title
         let newTask = document.createElement("div");
         newTask.className = "task";
-        newTask.textContent = taskList[i].title;
+
+        let taskTitle = document.createElement("h1");
+        taskTitle.textContent = taskList[i].title;
+
+        let taskDesc = document.createElement("p")   
+        taskDesc.textContent = taskList[i].description;
+        
+        newTask.append(taskTitle);
+        taskTitle.append(taskDesc);
         taskContainer.append(newTask);
+
+        //Changes color of "task" div depending on priority
+        if(taskList[i].priority == "low"){
+            newTask.style.backgroundColor = "rgba(12, 236, 4, 0.75)";
+        }else if(taskList[i].priority == "medium"){
+            newTask.style.backgroundColor = "rgba(255, 251, 1, 0.75)";
+        }else if(taskList[i].priority == "high"){
+            newTask.style.backgroundColor = "rgba(255, 1, 1, 0.75)"
+        }
+
+        //Creates "taskDue" div, appends to task div
+        let taskDue = document.createElement("div");
+        taskDue.className = "taskDue";
+        taskDue.textContent = "Due: " + taskList[i].dueDate;
+        newTask.append(taskDue);
     }
 }
 

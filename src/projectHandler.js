@@ -1,5 +1,30 @@
 //Projects variable to hold all project objects
-let projects = [];
+let projects = [
+    {
+    title: "First Project",
+    description: "Do it like this",
+    id: 0,
+    tasks: [
+        {
+        title: "Cure eczema",
+        description: "Find a cure for itchy skin rashes",
+        dueDate: "2021-05-13",
+        priority: "high"
+        },
+        {
+        title: "End all war ",
+        description: "Violence is bad so lets make everyone stop",
+        dueDate: "2020-04-17",
+        priority: "medium"
+        },
+        {
+        title: "Brainstorm reasonable tasks",
+        description: "Find more reasonable goals so I can actually accomplish something",
+        dueDate: "2020-11-21",
+        priority: "low"
+        },
+    ]},
+];
 
 //Unique ID number to associate "project" divs with "project" objects
 let currentID = 0;

@@ -1,8 +1,9 @@
 body{
     font-family: sans-serif;
+    background-color: gray;
 }
 .sidebar{
-    background-color: rgba(1, 1, 1, 0.788);
+    background-color: rgba(26, 26, 26, 0.788);
     position: fixed;
     margin-left: -8px;
     margin-top: -8px;
@@ -12,7 +13,9 @@ body{
     color: white;
 }
 #nameDiv{
-    margin-top: -8px;
+    color: white;
+    background-color:rgb(85, 85, 85);
+    margin-top: 0px;
     margin-left: 300px;
     text-align: center;
     border: 1px solid black;
@@ -23,12 +26,36 @@ body{
 }
 .task{
     font-size: 20px;
-    display: block;
+    text-align: left;
+    align-items: center;
+    display: flex;
     margin: auto;
     margin-top: 20px;
-    border: 1px solid green;
+    border-radius: 10px;
     width: 90%;
     padding: 15px;
+    box-shadow: 0px 0px 5px;
+}
+.task h1{
+    margin: 0;
+    margin-top: -10px;
+    padding: 0px;
+    font-size: 25px;
+    max-width: 70%;
+}
+.task p{
+    margin: 0;
+    margin-bottom: -10px;
+    font-size: 18px;
+    left: 0px;
+    font-weight: lighter;
+}
+.taskDue{
+    display: block;
+    margin: auto;
+    margin-right: 0;
+    margin-bottom: -10px;
+    font-size: 16px;
 }
 .project{
     font-size: 20px;
