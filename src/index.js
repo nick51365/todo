@@ -4,9 +4,10 @@ import * as displayController from "./displayController.js";
 
 //Assign submit event listener to project form
 let projectForm = document.getElementById("projectForm");
+let title = document.getElementById("titleInput");
 projectForm.addEventListener("submit", () => {
     projectHandler.addProject(event);
-    displayController.displayProjectSidebar(); 
+    displayController.displayProjectSidebar(title.textContent); 
 });
 
 //Assign event listener to "Add Project" button
@@ -38,6 +39,7 @@ taskBtn.addEventListener("click",() => {
     }
 
 });
+
 
 //Display existing projects on page load
 displayController.displayOnLoad();

@@ -1,6 +1,6 @@
 import * as projectHandler from "./projectHandler.js";
 
-//Index within "projects" array of currently displayed project
+//Index within local storage of currently displayed project
 let displayedIndex = "";
 
 //Identify projectsContainer div
@@ -8,52 +8,87 @@ let projectsContainer = document.getElementById("projectsContainer");
 
 //On page load, iterate through local storage and display existing projects
 function displayOnLoad(){
-    for (let i = 0; i < localStorage.length; i++){
-        projectHandler.currentID++;
-        let newProject = document.createElement("div");
-        let dataID = projectHandler.currentID - 1;
+    console.log(Object.keys(localStorage));
+    Object.keys(localStorage).forEach(key => {
+        
+        if (key != "currentID"){
+            let newProject = document.createElement("div");
+            let dataID = localStorage.getItem("currentID") - 1;
 
-        //Parse current project object from local storage
-        let currentProject = JSON.parse(localStorage[i]);
+            //Parse current project object from local storage
+            let currentProject = JSON.parse(localStorage[key]);
 
-        //Build project div in sidebar
-        newProject.textContent = currentProject.title;
-        newProject.className = "project";
-        newProject.setAttribute("data-id", dataID);
-        newProject.addEventListener("click", () => {
-            displayProjectMain(dataID, currentProject);
-            displayTasks(dataID);
-        });
-        projectsContainer.append(newProject);   
-    };
+            //Build project div in sidebar
+            newProject.textContent = currentProject.title;
+            newProject.className = "project";
+            newProject.setAttribute("data-id", dataID);
+            newProject.addEventListener("click", () => {
+                displayProjectMain(dataID, currentProject);
+                displayTasks(dataID);
+            });
+            projectsContainer.append(newProject);
+            };
+        }
+    );
 };
 
 //When a new project is created, create a div with "project" class and append to DOM
 function displayProjectSidebar(){
-   let newProject = document.createElement("div");
-   let dataID = projectHandler.currentID - 1;
+    let newProject = document.createElement("div");
+    let dataID = parseInt(localStorage.getItem("currentID")) - 1;
 
    //Parse project from local storage so it can be read as an object
-    let currentProject = JSON.parse(localStorage[localStorage.length - 1]);
+    let currentProject = JSON.parse(localStorage.getItem(projectHandler.mostRecentKey));
     newProject.textContent = currentProject.title;
     newProject.className = "project";
     newProject.setAttribute("data-id", dataID);
     newProject.addEventListener("click", () => {
         displayProjectMain(dataID, currentProject);
         displayTasks(dataID);
-    });
+});
+
+    //Append new project to sidebar
     projectsContainer.append(newProject);
 };
 
 //When a project on sidebar is clicked, display on main display
 function displayProjectMain(dataID, currentProject){
-    
+
     //Update displayedIndex to ID of clicked project
     displayedIndex = dataID;
-    console.log("displayedIndex = ", displayedIndex );
+
     //Display name of project on main display
     let nameDisplay = document.getElementById("nameDisplay");
+    nameDisplay.innerHTML = "";
     nameDisplay.textContent = currentProject.title; 
+
+    //Create delete button
+    let deleteButton = document.createElement("div");
+    deleteButton.className = "deleteButton";
+    deleteButton.id = `btn${dataID}`;
+    deleteButton.addEventListener("click",() => deleteProject(dataID)) ;
+
+    nameDisplay.append(deleteButton);
+};
+
+//When delete button is pressed, delete project from sidebar and local storage
+function deleteProject(dataID){
+
+    //Identify corresponding project on sidebar and remove DOM element
+    let sidebarDiv = document.querySelector(`[data-id='${dataID}']`);
+    sidebarDiv.remove();
+
+    //Clear name display
+    let nameDisplay = document.getElementById("nameDisplay");
+    nameDisplay.textContent = "Project Name";
+
+    //Clear task container
+    let taskContainer = document.getElementById("taskContainer");
+    taskContainer.innerHTML = "";
+
+    //Delete project from local storage
+    localStorage.removeItem(dataID)
+
 };
 
 //Clears task container and repopulates with updated task list
@@ -73,9 +108,10 @@ function displayTasks(){
         let taskTitle = document.createElement("h1");
         taskTitle.textContent = taskList[i].title;
 
+        //Create a div to hold description text
         let taskDesc = document.createElement("p")   
         taskDesc.textContent = taskList[i].description;
-        
+
         newTask.append(taskTitle);
         taskTitle.append(taskDesc);
         taskContainer.append(newTask);
@@ -95,7 +131,7 @@ function displayTasks(){
         taskDue.textContent = "Due: " + taskList[i].dueDate;
         newTask.append(taskDue);
     }
-}
+};
 
 export{
     displayProjectSidebar,

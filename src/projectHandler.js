@@ -1,14 +1,16 @@
-//Projects variable to hold all project objects
-let projects = [];
-
 //Unique ID number to associate "project" divs with "project" objects
+//If no currentID exists in local storage, create with initial value of 0
+if (localStorage.getItem("currentID") === null){
+    localStorage.setItem("currentID",0);
+};
 let currentID = 0;
+let mostRecentKey = "";
+
 
 //Create a new project object
 function Project(title, description){
     this.title = title
     this.description = description
-    this.id = currentID
     this.tasks = []
 };
 
@@ -19,9 +21,17 @@ function addProject(event){
 
     //Stringify object so it can be stored locally
     let createdProject_serialized = JSON.stringify(createdProject);
-    localStorage.setItem(currentID, createdProject_serialized);
-    currentID++;
+
+    //Adds created project to local storage
+    let storageID = localStorage.getItem("currentID");
+    mostRecentKey = storageID;
+    localStorage.setItem(storageID, createdProject_serialized);
+    
+    //Increment currentID in local storage  
+    storageID++;
+    localStorage.setItem("currentID", storageID);
     closeForm();
+
 };
 
 //Closes the add project form and clears fields.
@@ -34,8 +44,7 @@ function closeForm(){
 
 export{
     Project,
-    projects,
     addProject,
     currentID,
-    
+    mostRecentKey,
 };
