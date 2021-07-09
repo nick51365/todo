@@ -8,12 +8,11 @@ let projectsContainer = document.getElementById("projectsContainer");
 
 //On page load, iterate through local storage and display existing projects
 function displayOnLoad(){
-    console.log(Object.keys(localStorage));
     Object.keys(localStorage).forEach(key => {
         
         if (key != "currentID"){
             let newProject = document.createElement("div");
-            let dataID = localStorage.getItem("currentID") - 1;
+            let dataID = key;
 
             //Parse current project object from local storage
             let currentProject = JSON.parse(localStorage[key]);
@@ -25,8 +24,10 @@ function displayOnLoad(){
             newProject.addEventListener("click", () => {
                 displayProjectMain(dataID, currentProject);
                 displayTasks(dataID);
+                restyleSelected(newProject);
             });
             projectsContainer.append(newProject);
+
             };
         }
     );
@@ -45,6 +46,7 @@ function displayProjectSidebar(){
     newProject.addEventListener("click", () => {
         displayProjectMain(dataID, currentProject);
         displayTasks(dataID);
+        restyleSelected(newProject);
 });
 
     //Append new project to sidebar
@@ -52,7 +54,7 @@ function displayProjectSidebar(){
 };
 
 //When a project on sidebar is clicked, display on main display
-function displayProjectMain(dataID, currentProject){
+function displayProjectMain(dataID, currentProject, newProject){
 
     //Update displayedIndex to ID of clicked project
     displayedIndex = dataID;
@@ -69,6 +71,16 @@ function displayProjectMain(dataID, currentProject){
     deleteButton.addEventListener("click",() => deleteProject(dataID)) ;
 
     nameDisplay.append(deleteButton);
+};
+
+//Restyle selected project div by assigning "selectedProject" class
+function restyleSelected(currentDiv){
+    //Reset all project divs to unselected "project" class
+    let projectList = document.querySelectorAll(".project");
+    projectList.forEach((project) => project.className = "project");
+
+    //Restyle selected project
+    currentDiv.classList.add("selectedProject");
 };
 
 //When delete button is pressed, delete project from sidebar and local storage

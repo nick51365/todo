@@ -68,6 +68,12 @@ body{
     background-color: rgba(182, 182, 182, 0.158);
     width: 80%;
     cursor: pointer;
+    border-radius: 8px;;
+}
+.selectedProject{
+    box-shadow:inset  0px 0px 0px 3px rgb(51, 51, 51);
+    background-color:rgb(90, 90, 90);
+    font-size: 19.5px;
 }
 #projectBtn{
     padding: 5px;
