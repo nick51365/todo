@@ -26,6 +26,7 @@ body{
     text-align: center;
 }
 .task{
+    position: relative;
     font-size: 20px;
     text-align: left;
     align-items: center;
@@ -54,7 +55,7 @@ body{
 .taskDue{
     display: block;
     margin: auto;
-    margin-right: 0;
+    margin-right: -7px;;
     margin-bottom: -10px;
     font-size: 16px;
 }
@@ -71,9 +72,9 @@ body{
     border-radius: 8px;;
 }
 .selectedProject{
-    box-shadow:inset  0px 0px 0px 3px rgb(51, 51, 51);
+    box-shadow:inset  0px 0px 0px 3px rgb(90, 90, 90);
     background-color:rgb(90, 90, 90);
-    font-size: 19.5px;
+    font-size: 19px;
 }
 #projectBtn{
     padding: 5px;
@@ -156,4 +157,15 @@ body{
     width: 20px;
     background-image: url("/src/assets/images/delete.png");
     background-size: cover;
+}
+.taskDeleteBtn{
+    background-image: url("/src/assets/images/delete_black.png");
+    background-size: cover;
+    cursor: pointer;
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    top: 6px;
+    right: 6px;
+
 }

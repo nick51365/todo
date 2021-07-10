@@ -23,7 +23,7 @@ function displayOnLoad(){
             newProject.setAttribute("data-id", dataID);
             newProject.addEventListener("click", () => {
                 displayProjectMain(dataID, currentProject);
-                displayTasks(dataID);
+                displayTasks();
                 restyleSelected(newProject);
             });
             projectsContainer.append(newProject);
@@ -45,7 +45,7 @@ function displayProjectSidebar(){
     newProject.setAttribute("data-id", dataID);
     newProject.addEventListener("click", () => {
         displayProjectMain(dataID, currentProject);
-        displayTasks(dataID);
+        displayTasks();
         restyleSelected(newProject);
 });
 
@@ -54,7 +54,7 @@ function displayProjectSidebar(){
 };
 
 //When a project on sidebar is clicked, display on main display
-function displayProjectMain(dataID, currentProject, newProject){
+function displayProjectMain(dataID, currentProject){
 
     //Update displayedIndex to ID of clicked project
     displayedIndex = dataID;
@@ -113,19 +113,39 @@ function displayTasks(){
     //Iterate through the task list
     for (let i = 0; i < taskList.length; i++){
 
-        //Creates a "task" div containing an h1 for its title
+        //Creates a "task" div
         let newTask = document.createElement("div");
         newTask.className = "task";
 
+        //Creates/appends a div to hold title text
         let taskTitle = document.createElement("h1");
         taskTitle.textContent = taskList[i].title;
+        newTask.append(taskTitle);
 
-        //Create a div to hold description text
+        //Creates/appends a div to hold description text
         let taskDesc = document.createElement("p")   
         taskDesc.textContent = taskList[i].description;
-
-        newTask.append(taskTitle);
         taskTitle.append(taskDesc);
+        
+        //Creates "taskDue" div, appends to task div
+        let taskDue = document.createElement("div");
+        taskDue.className = "taskDue";
+        taskDue.textContent = "Due: " + taskList[i].dueDate;
+        newTask.append(taskDue);
+
+        //Creates button with "taskDeleteBtn" class, appends to div
+        let taskDeleteBtn = document.createElement("div");
+        let currentTask = taskList[i];
+        taskDeleteBtn.className = "taskDeleteBtn";
+        taskDeleteBtn.addEventListener("click", () => deleteTask(
+            taskList, 
+            i, 
+            currentProject, 
+            displayedIndex
+            ));
+        newTask.append(taskDeleteBtn);
+
+        //Append task div to task container
         taskContainer.append(newTask);
 
         //Changes color of "task" div depending on priority
@@ -136,13 +156,23 @@ function displayTasks(){
         }else if(taskList[i].priority == "high"){
             newTask.style.backgroundColor = "rgba(255, 1, 1, 0.75)"
         }
-
-        //Creates "taskDue" div, appends to task div
-        let taskDue = document.createElement("div");
-        taskDue.className = "taskDue";
-        taskDue.textContent = "Due: " + taskList[i].dueDate;
-        newTask.append(taskDue);
     }
+};
+
+//When taskDeleteBtn is pressed, task is deleted
+function deleteTask(taskList, i, currentProject, displayedIndex){
+    
+    //Splice selected task from taskList
+    taskList.splice(i, 1);
+    
+    //Replace task list with edited task list
+    currentProject.tasks = taskList;
+
+    //Replace project in local storage with edited project
+    localStorage[displayedIndex] = JSON.stringify(currentProject);
+    
+    //Display edited task list in task display
+    displayTasks();
 };
 
 export{
