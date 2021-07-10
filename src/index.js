@@ -7,7 +7,7 @@ let projectForm = document.getElementById("projectForm");
 let title = document.getElementById("titleInput");
 projectForm.addEventListener("submit", () => {
     projectHandler.addProject(event);
-    displayController.displayProjectSidebar(title.textContent); 
+    displayController.displayProjectSidebar(); 
 });
 
 //Assign event listener to "Add Project" button
@@ -37,9 +37,11 @@ taskBtn.addEventListener("click",() => {
     }else if (tasksFormContainer.style.display == "flex"){
         tasksFormContainer.style.display = "";
     }
-
 });
 
-
 //Display existing projects on page load
+projectHandler.createMiscTasks();
 displayController.displayOnLoad();
+let miscTasks = document.querySelector(".project");
+miscTasks.classList.add("selectedProject");
+

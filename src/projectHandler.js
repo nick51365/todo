@@ -31,8 +31,27 @@ function addProject(event){
     storageID++;
     localStorage.setItem("currentID", storageID);
     closeForm();
-
 };
+
+function createMiscTasks(){
+    //If currentID = 0, create Misc. Tasks
+    if (localStorage.getItem("currentID") == "0"){
+
+    let createdProject = new Project("Misc. Tasks","");
+
+    //Stringify object so it can be stored locally
+    let createdProject_serialized = JSON.stringify(createdProject);
+
+    //Adds created project to local storage
+    let storageID = localStorage.getItem("currentID");
+    mostRecentKey = storageID;
+    localStorage.setItem(storageID, createdProject_serialized);
+    
+    //Increment currentID in local storage  
+    storageID++;
+    localStorage.setItem("currentID", storageID);
+    };
+}
 
 //Closes the add project form and clears fields.
 //Required beause event.preventDefault() is used in addProject function
@@ -45,6 +64,7 @@ function closeForm(){
 export{
     Project,
     addProject,
+    createMiscTasks,
     currentID,
     mostRecentKey,
 };

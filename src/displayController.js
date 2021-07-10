@@ -1,7 +1,7 @@
 import * as projectHandler from "./projectHandler.js";
 
 //Index within local storage of currently displayed project
-let displayedIndex = "";
+let displayedIndex = 0;
 
 //Identify projectsContainer div
 let projectsContainer = document.getElementById("projectsContainer");
@@ -64,12 +64,16 @@ function displayProjectMain(dataID, currentProject){
     nameDisplay.innerHTML = "";
     nameDisplay.textContent = currentProject.title; 
 
-    //Create delete button
+    //Create h2 div for project description, append to name display
+    let descDisplay = document.createElement("h2");
+    descDisplay.textContent = currentProject.description;
+    nameDisplay.append(descDisplay);
+
+    //Create delete button and append to nameDisplay
     let deleteButton = document.createElement("div");
     deleteButton.className = "deleteButton";
     deleteButton.id = `btn${dataID}`;
     deleteButton.addEventListener("click",() => deleteProject(dataID)) ;
-
     nameDisplay.append(deleteButton);
 };
 
@@ -86,6 +90,7 @@ function restyleSelected(currentDiv){
 //When delete button is pressed, delete project from sidebar and local storage
 function deleteProject(dataID){
 
+    if (confirm("Delete this project?") === true){
     //Identify corresponding project on sidebar and remove DOM element
     let sidebarDiv = document.querySelector(`[data-id='${dataID}']`);
     sidebarDiv.remove();
@@ -100,7 +105,7 @@ function deleteProject(dataID){
 
     //Delete project from local storage
     localStorage.removeItem(dataID)
-
+    };
 };
 
 //Clears task container and repopulates with updated task list
@@ -162,6 +167,7 @@ function displayTasks(){
 //When taskDeleteBtn is pressed, task is deleted
 function deleteTask(taskList, i, currentProject, displayedIndex){
     
+    if (confirm("Delete this task?") === true) {
     //Splice selected task from taskList
     taskList.splice(i, 1);
     
@@ -173,6 +179,7 @@ function deleteTask(taskList, i, currentProject, displayedIndex){
     
     //Display edited task list in task display
     displayTasks();
+    };
 };
 
 export{
