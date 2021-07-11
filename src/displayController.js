@@ -61,6 +61,7 @@ function displayProjectMain(dataID, currentProject){
 
     //Display name of project on main display
     let nameDisplay = document.getElementById("nameDisplay");
+    let deleteWrapper = document.getElementById("deleteWrapper");
     nameDisplay.innerHTML = "";
     nameDisplay.textContent = currentProject.title; 
 
@@ -69,12 +70,15 @@ function displayProjectMain(dataID, currentProject){
     descDisplay.textContent = currentProject.description;
     nameDisplay.append(descDisplay);
 
-    //Create delete button and append to nameDisplay
+    //Create delete button and append to nameDisplay, except for Misc. Tasks
+    deleteWrapper.innerHTML = "";
+    if (displayedIndex != 0){
     let deleteButton = document.createElement("div");
     deleteButton.className = "deleteButton";
     deleteButton.id = `btn${dataID}`;
     deleteButton.addEventListener("click",() => deleteProject(dataID)) ;
-    nameDisplay.append(deleteButton);
+    deleteWrapper.append(deleteButton);
+    };
 };
 
 //Restyle selected project div by assigning "selectedProject" class
@@ -95,16 +99,20 @@ function deleteProject(dataID){
     let sidebarDiv = document.querySelector(`[data-id='${dataID}']`);
     sidebarDiv.remove();
 
-    //Clear name display
-    let nameDisplay = document.getElementById("nameDisplay");
-    nameDisplay.textContent = "Project Name";
-
     //Clear task container
     let taskContainer = document.getElementById("taskContainer");
     taskContainer.innerHTML = "";
 
     //Delete project from local storage
     localStorage.removeItem(dataID)
+
+    //Reset display to Misc. Tasks project
+    let nameDisplay = document.getElementById("nameDisplay");
+    nameDisplay.textContent = "Misc. Tasks";
+    displayedIndex = 0;
+    displayTasks();
+    let miscTasks = document.querySelector(`[data-id='0']`);
+    miscTasks.classList.add("selectedProject");
     };
 };
 
@@ -155,11 +163,11 @@ function displayTasks(){
 
         //Changes color of "task" div depending on priority
         if(taskList[i].priority == "low"){
-            newTask.style.backgroundColor = "rgba(12, 236, 4, 0.75)";
+            newTask.style.backgroundColor = "rgba(0, 200, 0, 0.75)";
         }else if(taskList[i].priority == "medium"){
-            newTask.style.backgroundColor = "rgba(255, 251, 1, 0.75)";
+            newTask.style.backgroundColor = "rgba(220, 220, 0, 0.75)";
         }else if(taskList[i].priority == "high"){
-            newTask.style.backgroundColor = "rgba(255, 1, 1, 0.75)"
+            newTask.style.backgroundColor = "rgba(255, 1, 1, 0.7)"
         }
     }
 };
@@ -182,10 +190,45 @@ function deleteTask(taskList, i, currentProject, displayedIndex){
     };
 };
 
+//Clears all tasks of current project
+function clearTasks(){
+
+    if (confirm("Clear all tasks?") === true){
+    //Get current project from local storage
+    let currentProject = JSON.parse(localStorage[displayedIndex]);
+
+    //Clear tasks of current project
+    currentProject.tasks = [];
+
+    //Update local storage
+    let currentProject_serialized = JSON.stringify(currentProject);
+    localStorage.setItem(displayedIndex, currentProject_serialized);
+
+    //Update display
+    displayTasks();
+    }
+};
+
+//On pageload, build initial display
+function pageOnLoad(){
+
+    //Create default "Misc. Tasks" project
+    projectHandler.createMiscTasks();
+    //Display existing projects on page load
+    displayOnLoad();
+    //Display tasks of "Misc. Tasks" project
+    displayTasks();
+    //Add "selectedProject" class to "Misc. Tasks"
+    let miscTasks = document.querySelector(".project");
+    miscTasks.classList.add("selectedProject");
+};
+
 export{
     displayProjectSidebar,
     displayProjectMain,
     displayTasks,
+    clearTasks,
     displayOnLoad,
+    pageOnLoad,
     displayedIndex,
 }

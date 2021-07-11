@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="/src/styles.css">
+        <title>Task Tracker</title>
     </head>
     <body>
         <div class="sidebar">
@@ -12,10 +13,14 @@
         </div>
         <div id="nameDiv">
             <h1 id="nameDisplay">Misc. Tasks</h1>
+                <div id="btnWrapper">
+                    <button id="taskBtn">+ Add Task</button>
+                    <button id="clearTasks">Clear Tasks</button>
+                    <div id="deleteWrapper"> </div>
+                </div>
         </div>
         <div id="taskContainer">
         </div>
-        <button id="taskBtn">+ Add Task</button>
         <div id="projectsFormContainer">
             <form id="projectForm">
                 <h1>New Project</h1>

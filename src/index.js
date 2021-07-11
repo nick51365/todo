@@ -39,9 +39,10 @@ taskBtn.addEventListener("click",() => {
     }
 });
 
-//Display existing projects on page load
-projectHandler.createMiscTasks();
-displayController.displayOnLoad();
-let miscTasks = document.querySelector(".project");
-miscTasks.classList.add("selectedProject");
+//Assign event listener to "Clear Tasks" button
+const clearTasks = document.getElementById("clearTasks");
+clearTasks.addEventListener("click",() => displayController.clearTasks());
+
+
+displayController.pageOnLoad();
 

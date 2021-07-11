@@ -18,17 +18,20 @@ body{
 }
 #nameDiv{
     text-shadow:5px 5px 5px rgb(0, 0, 0);
-    border-radius: 10px;
     box-shadow: 0px 3px 10px 3px rgb(50,50,50);;
     position: relative;
     color: white;
     background-color:rgb(85, 85, 85);
-    margin-top: 0px;
-    margin-left: 300px;
+    margin-top: -21px;
+    margin-left: 292px;
+    margin-right: -8px;
     text-align: center;
-    border: 1px solid black;
-}
+    max-width: 1200px;
 
+}
+#nameDisplay{
+    padding-top: 15px;
+}
 #nameDiv h2{
     font-size: 15px;
 }
@@ -41,7 +44,7 @@ body{
     font-size: 20px;
     color: white;
     text-align: left;
-    text-shadow:3px 3px 5px rgb(2, 2, 2);
+    text-shadow:-1px 3px 5px black;
     align-items: center;
     display: flex;
     margin: auto;
@@ -51,6 +54,7 @@ body{
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0px 3px 15px black;
+    max-width: 1000px;
 }
 .task h1{
     margin: 0;
@@ -64,7 +68,7 @@ body{
     margin-bottom: -10px;
     font-size: 18px;
     left: 0px;
-    font-weight: lighter;
+    font-weight:lighter;
 }
 .taskDue{
     display: block;
@@ -80,14 +84,14 @@ body{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px;
-
     background-color:rgb(85, 85, 85);
+    box-shadow: 0px 3px 15px black;
     width: 80%;
     cursor: pointer;
     border-radius: 8px;;
 }
 .selectedProject{
-    box-shadow:inset  0px 0px 0px 3px rgb(65, 65, 65);
+    box-shadow:inset  0px 0px 10px 5px rgb(61, 61, 61);
     background-color: rgb(68, 68, 68);
     font-size: 19px;
 }
@@ -97,24 +101,51 @@ body{
     width: 70%;
     font-size: 17px;
     margin-top: 10px;
+    border-radius: 5px;
     cursor: pointer;
     box-shadow: 0px 0px 15px -5px black;
     text-shadow:3px 3px 5px rgb(2, 2, 2);
     background-color:rgb(85, 85, 85);
 }
 #taskBtn{
+    margin-right: 5px;
+    margin-bottom: 5px;
     color: white;
-    position: absolute;
     border-radius: 5px;
-    right: 3%;
-    font-size: 17px;
+    font-size: 14px;
     padding: 5px;
     cursor: pointer;
-    margin-top: 20px;
-    width: 150px;
+    width: 100px;
     box-shadow: 0px 0px 15px -5px black;
     text-shadow:3px 3px 5px rgb(2, 2, 2);
-    background-color:rgb(85, 85, 85);
+    background-color: rgb(68, 68, 68);
+}
+#clearTasks{
+    margin-bottom: 5px;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 5px;
+    cursor: pointer;
+    width: 100px;
+    box-shadow: 0px 0px 15px -5px black;
+    text-shadow:3px 3px 5px rgb(2, 2, 2);
+    background-color: rgb(68, 68, 68);
+}
+.deleteButton{
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    height: 22px;
+    width: 22px;
+    background-image: url("/src/assets/images/delete.png");
+    background-size: cover;
+}
+#btnWrapper{
+    margin-right: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items:flex-end;
 }
 #projectsFormContainer{
     display: none;
@@ -174,16 +205,7 @@ body{
     width: 30%;
     margin: 20px;
 }
-.deleteButton{
-    cursor: pointer;
-    position: absolute;
-    top: 4px;
-    right: 2px;
-    height: 20px;
-    width: 20px;
-    background-image: url("/src/assets/images/delete.png");
-    background-size: cover;
-}
+
 .taskDeleteBtn{
     background-image: url("/src/assets/images/delete_black.png");
     background-size: cover;
